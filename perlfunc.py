@@ -38,7 +38,7 @@ def sys_exec(cmd, shell = True, env = None):
 	a = Popen(cmd, shell = shell, stdout = PIPE, stderr = PIPE, env = env)
 	a.wait()	# Wait process to terminate
 	if a.returncode: # Not 0 => Error
-		raise a.communicate()[1]
+		raise Exception(a.communicate()[1])
 
 	return a.communicate()[0]
 
@@ -129,7 +129,7 @@ def perlfunc(fn):
 			open(DAT, ">''' + pipename + '''") || die("Cannot Open File for communication");
 	
 			@rst = (%s%s);
-			if (defined(@rst)) {
+			if (@rst) {
 				$len = @rst;
 			} else {
 				$len = 0;
